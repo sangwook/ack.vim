@@ -38,6 +38,11 @@ function! s:Ack(cmd, args)
     let l:grepargs = expand("<cword>")
   else
     let l:grepargs = a:args . join(a:000, ' ')
+    " echom l:grepargs
+	  " 131211상욱 windows shell 에서 chcp 명령을 쳐 보면 인코딩이 949로 나오고.
+	  " ack 에 넘기는 매개변수의 인코딩을 utf-8에서 cp949 로 변환한다.
+    let l:grepargs = iconv(l:grepargs, 'utf-8', 'cp949')
+	  " echom l:grepargs
   end
 
   " Format, used to manage column jump
